@@ -11,18 +11,14 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   const ipfs = await getIpfs();
-  window.ipfs = ipfs;
-
-  Hls.DefaultConfig.loader = HlsjsIpfsLoader;
-  Hls.DefaultConfig.debug = false;
 
   const index = await ipfs.cat(`${pHash}/index.json`)
                           .then(file => JSON.parse(file.toString('utf8')));
 
+  const hlsManifest = ipfs.ls(`${pHash}/master.m3u8`).then(() => true, () => false);
+
   Hls.DefaultConfig.loader = HlsjsIPFSLoader;
   Hls.DefaultConfig.debug = false;
-
-  const hlsManifest = ipfs.ls(`${pHash}/master.m3u8`).then(() => true, () => false);
 
   const ap = new APlayer({
     container: document.getElementById('aplayer'),
@@ -35,13 +31,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     customAudioType: {
       async customHls(audioElement, audio, player) {
         if ((await hlsManifest) && Hls.isSupported()) {
-          const hls = new Hls();
-          hls.config.ipfs = ipfs;
-          hls.config.ipfsHash = pHash;
+          const hls = new Hls({ ipfs, ipfsHash: pHash });
           hls.loadSource(audio.url);
           hls.attachMedia(audioElement);
         } else {
-          const file = ipfs.cat(`${pHash}/1.mp3`).then(({ buffer }) => new Blob([ buffer ]));
+          const file = ipfs.cat(`${pHash}/1.mp3`)
+                           .then(({ buffer }) => new Blob([ buffer ]));
           audioElement.src = URL.createObjectURL(await file);
         }
       }
