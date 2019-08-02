@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   const ipfs = await getIpfs();
+  window.ipfs = ipfs;
 
   Hls.DefaultConfig.loader = HlsjsIpfsLoader;
   Hls.DefaultConfig.debug = false;
@@ -35,14 +36,13 @@ document.addEventListener("DOMContentLoaded", async () => {
       async customHls(audioElement, audio, player) {
         if ((await hlsManifest) && Hls.isSupported()) {
           const hls = new Hls();
-          hls.config.ipfs = node;
+          hls.config.ipfs = ipfs;
           hls.config.ipfsHash = pHash;
           hls.loadSource(audio.url);
           hls.attachMedia(audioElement);
-        } else if ((await hlsManifest) && (audioElement.canPlayType('application/x-mpegURL') || audioElement.canPlayType('application/vnd.apple.mpegURL'))) {
-          audioElement.src = `https://ipfs.io/ipfs/${pHash}/${audio.url}`;
         } else {
-          audioElement.src = `https://ipfs.io/ipfs/${pHash}/1.mp3`;
+          const file = ipfs.cat(`${pHash}/1.mp3`).then(({ buffer }) => new Blob([ buffer ]));
+          audioElement.src = URL.createObjectURL(await file);
         }
       }
     }
