@@ -5,8 +5,7 @@ module.exports = {
   entry: './src/index.js',
   externals: {
     'aplayer': 'APlayer',
-    'hls': 'Hls',
-    'hlsjs-ipfs-loader': 'HlsjsIpfsLoader'
+    'hls': 'Hls'
   },
   plugins: [
     new CopyPlugin([
