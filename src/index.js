@@ -1,7 +1,7 @@
 import APlayer from 'aplayer';
+import getIpfs from 'window.ipfs-fallback';
 import Hls from 'hls';
 import HlsjsIPFSLoader from 'hlsjs-ipfs-loader';
-import getIpfs from 'window.ipfs-fallback';
 
 document.addEventListener("DOMContentLoaded", async () => {
   let pHash = window.location.hash.substr(1);
@@ -51,8 +51,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (index.hasOwnProperty('cover')) {
     const file = ipfs.cat(`${pHash}/${index.cover}`)
                      .then(({ buffer }) => new Blob([ buffer ]));
-    const coverEl = ap.container.getElementsByClassName('aplayer-pic')[0];
-    coverEl.style.backgroundImage = `url("${URL.createObjectURL(await file)}")`;
+    ap.list.audios[0].cover = URL.createObjectURL(await file);
+    ap.template.pic.style.backgroundImage = `url("${ap.list.audios[0].cover}")`;
   }
 
 });
