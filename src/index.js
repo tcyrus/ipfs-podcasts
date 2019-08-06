@@ -9,10 +9,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     pHash = 'QmSaeHyw62dejXcZU1HBvncCsCHuL6BnNKhbUhhtwkHbrL';
   }
 
-  console.log(HlsjsIPFSLoader);
-
   const ipfs = await getIpfs();
-  window.ipfs = ipfs;
 
   const index = await ipfs.cat(`${pHash}/index.json`)
                           .then(file => JSON.parse(file.toString('utf8')));
