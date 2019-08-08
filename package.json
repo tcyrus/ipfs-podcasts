@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.5.5",
-    "hlsjs-ipfs-loader": "github:tcyrus/hlsjs-ipfs-loader#master",
+    "hlsjs-ipfs-loader": "github:moshisushi/hlsjs-ipfs-loader#master",
     "window.ipfs-fallback": "^1.2.0"
   }
 }

@@ -6599,9 +6599,9 @@ hipchat-notifier@^1.1.0:
     lodash "^4.0.0"
     request "^2.0.0"
 
-"hlsjs-ipfs-loader@github:tcyrus/hlsjs-ipfs-loader#master":
+"hlsjs-ipfs-loader@github:moshisushi/hlsjs-ipfs-loader#master":
   version "0.1.5"
-  resolved "https://codeload.github.com/tcyrus/hlsjs-ipfs-loader/tar.gz/fbbfade67d13c9b12d5f4736c525f494756b4332"
+  resolved "https://codeload.github.com/moshisushi/hlsjs-ipfs-loader/tar.gz/e8cfd94ba4b7b79ed2df01686f25306e7201364c"
   dependencies:
     aegir "^15.2.0"
 
@@ -7814,9 +7814,9 @@ karma-junit-reporter@^1.2.0:
     path-is-absolute "^1.0.0"
     xmlbuilder "8.2.2"
 
-"karma-mocha-own-reporter@git+https://github.com/dryajov/karma-mocha-own-reporter.git#d562a92a12d5c76469a05d67cee19bcb8db22b23":
+"karma-mocha-own-reporter@git+https://github.com/dryajov/karma-mocha-own-reporter#d562a92a12d5c76469a05d67cee19bcb8db22b23":
   version "1.1.2"
-  resolved "git+https://github.com/dryajov/karma-mocha-own-reporter.git#d562a92a12d5c76469a05d67cee19bcb8db22b23"
+  resolved "git+https://github.com/dryajov/karma-mocha-own-reporter#d562a92a12d5c76469a05d67cee19bcb8db22b23"
 
 karma-mocha-webworker@^1.3.0:
   version "1.3.0"
